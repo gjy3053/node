@@ -11,8 +11,8 @@ const server = http.createServer((req, res) => {
   if (myUrl.pathname == "/todolist") {
     res.end(JSON.stringify(todoList));
   } else if (myUrl.pathname == "/todo") {
-    let no = myurl.searchParams.get("no");
-    res.end(JSON.stringify(todoList[no]));
+    // let no = myurl.searchParams.get("no");
+    // res.end(JSON.stringify(todoList[no]));
   }
 });
 server.listen(3000, () => {
