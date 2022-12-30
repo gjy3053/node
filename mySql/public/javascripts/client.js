@@ -55,7 +55,7 @@ function insert() {
 function update() {
   updbtn.addEventListener("click", function (ev) {
     let data = {
-      id: userid.value,
+      //id: userid.value,
       name: username.value,
       email: email.value,
       phone: phone.value,
@@ -64,7 +64,7 @@ function update() {
     fetch(`${url}/${userid.value}`, {
       method: "put",
       headers: {
-        "content-type": "application/json",
+        "Content-type": "application/json",
       },
       body: JSON.stringify(data), //서버로 자료를 json으로 보낸다
     })

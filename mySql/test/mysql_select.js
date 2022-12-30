@@ -7,15 +7,18 @@ const conn = {
   post: "3306",
   user: "dev01",
   password: "1234",
-  database: "dev",
+  database: "dev", //연결한 이름
 };
 
-let connection = mysql.createConnection(conn); //DB커넥션 생성
-connection.connect(); //DB접속
+let connection = mysql.createConnection(conn); //DB커넥션 생성 ,연결준비
+connection.connect(); //DB접속, 연결
 
 sql = "SELECT * FROM customers";
 connection.query(sql, function (err, results, fields) {
-  console.log(results);
+  //db서버로 쿼리보냄
+  console.log(results); //결과받아오면 처리
 });
 
-connection.end(); //DB접속 종료
+connection.end(); //DB접속 종료 , 종료해야 다른 사람이 접속가능
+
+//커넥트-> 쿼리수행 -> 결과처리 -> 종료
