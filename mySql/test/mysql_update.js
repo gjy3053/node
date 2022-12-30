@@ -13,7 +13,8 @@ connection.connect(); //DB접속
 
 let sql = "update customers set ? where id=?";
 let data = [{ email: "park@gmail.com", name: "park" }, 3];
-
+//let sql = "update customers set email=?, name=? where id=?";
+//let data = ["aa@bb", "홍길동", 9];
 connection.query(sql, data, function (err, results, fields) {
   if (err) {
     console.log(err);

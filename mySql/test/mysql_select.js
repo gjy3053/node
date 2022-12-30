@@ -12,9 +12,11 @@ const conn = {
 
 let connection = mysql.createConnection(conn); //DB커넥션 생성 ,연결준비
 connection.connect(); //DB접속, 연결
-
-sql = "SELECT * FROM customers";
-connection.query(sql, function (err, results, fields) {
+let id = 6;
+let name = "고지연";
+let data = [id, name]; //만약 값이 하나면 배열로 보낼 필요 없다
+sql = "SELECT * FROM customers where id = ? and name = ?";
+connection.query(sql, data, function (err, results, fields) {
   //db서버로 쿼리보냄
   console.log(results); //결과받아오면 처리
 });

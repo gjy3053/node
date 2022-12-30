@@ -51,7 +51,7 @@ function insert() {
   });
 }
 
-//수정 고치기
+//수정
 function update() {
   updbtn.addEventListener("click", function (ev) {
     let data = {
@@ -70,7 +70,15 @@ function update() {
     })
       .then((res) => res.json()) //(client과 서버와의 통신형식은 무조건String) 그리고 나서 받을때도json으로 받는다
       .then((res) => {
-        selectAll();
+        if (res.result == true) {
+          alert("수정완료");
+          selectAll();
+        } else {
+          alert("수정실패");
+        }
+      })
+      .catch(() => {
+        alert("수정실패입니다.");
       });
   });
 }
