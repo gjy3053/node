@@ -3,10 +3,7 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-//session파일 생성
-//const session = require("express-session");
-//const fileStore = require("session-file-store")(session);
-const cookieSession = require("cookoe-session");
+//const cookieSession = require("cookoe-session");
 const express = require("express");
 
 var indexRouter = require("./routes/index");

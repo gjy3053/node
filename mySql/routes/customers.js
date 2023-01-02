@@ -28,7 +28,7 @@ router.get("/:id", (req, res) => {
 //등록
 router.post("/", (req, res) => {
   //req.body
-  let sql = "insert into customers set ?";
+  let sql = "insert into board set ?";
   pool.query(sql, req.body, function (err, results, fields) {
     if (err) {
       console.log(err);

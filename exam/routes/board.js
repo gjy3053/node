@@ -34,9 +34,20 @@ router.put("/:no", (req, res) => {
 
 //삭제
 router.delete("/:no", (req, res) => {
+  //왜안될까? customer.js보기
   const no = req.params.no;
   pool.query(sql.delete, no, function (err, results, fields) {
-    res.json(results);
+    let resultData = {};
+    if (err) {
+      console.log(err);
+      throw err;
+    } else if (results.changedRows > 0) {
+      resultData.result = true;
+      resultData.data = req.body;
+    } else {
+      resultData.result = false;
+    }
+    res.send(resultData);
   });
 });
 
