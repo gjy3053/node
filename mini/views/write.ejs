@@ -114,16 +114,24 @@
         </nav>
         <!-- Page content-->
         <div class="container-fluid">
-          <h1 class="mt-4">글작성 페이지</h1>
-
-          <p>제목</p>
-          <input type="text" id="title" />
-          <p>작성자</p>
-          <input type="text" id="writer" />
-          <p>내용</p>
-          <textarea rows="5" id="contents"></textarea>
+        <br><h2>게시글 작성</h2><br>
+            <table>
+                <tr>
+                    <th>제목</th>
+                    <td><textarea cols="100" rows="1" id="title"></textarea></td>
+                </tr>
+                <tr>
+                    <th>작성자</th>
+                    <td><textarea cols="100" rows="1" id="writer"></textarea></td>
+                </tr>
+                <tr>
+                    <th>내용</th>
+                    <td><textarea cols="100" rows="25" id="contents"></textarea></td>
+                </tr>
+            </table>
+            <button id="wirteBtn" type="button">작성완료</button>
+    </div>     
         </div>
-        <button id="wirteBtn" type="button">작성완료</button>
       </div>
     </div>
     <!-- Bootstrap core JS-->

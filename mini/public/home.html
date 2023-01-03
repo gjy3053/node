@@ -17,6 +17,8 @@
       button {
         margin-left: 10px;
       }
+   
+  
     </style>
   </head>
   <body>
@@ -65,10 +67,11 @@
             <button
               class="btn btn-primary"
               button
-              onclick="location.href='login.html'"
+              onclick="location.href='login'"
             >
               로그인
             </button>
+
 
             <button
               class="navbar-toggler"
@@ -115,7 +118,11 @@
         <!-- Page content-->
         <div class="container-fluid">
           <h1 class="mt-4">정보 공유 게시판</h1>
-          <p>정보 공유 게시판 입니다.</p>
+          <br>
+      <h3>오늘의 영화</h3>
+  <div id = "result" style="height: auto; width: 50%; border:1px solid #ccc"></div>
+ 
+    </div>
         </div>
       </div>
     </div>
@@ -123,5 +130,39 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
     <script src="/jsHome/scripts_home.js"></script>
+    <script>
+    
+      let today = new Date(); 
+      //document.getElementById("dt").value = String(today.getFullYear()) +("0" + (1 + today.getMonth())).slice(-2) + ("0" + (today.getDate()-1)).slice(-2);
+      let day = String(today.getFullYear()) +("0" + (1 + today.getMonth())).slice(-2) + ("0" + (today.getDate()-1)).slice(-2);
+    function promiseAjax(url){
+      return new Promise(function(resolve, reject){
+        //비동기함수 호출     
+        let xhr = new XMLHttpRequest();
+        xhr.onload = function(){ 
+          resolve(xhr.response);
+        };
+        xhr.onerror = function(){
+          reject(xhr.status);
+        }
+        xhr.open('get',url);
+        xhr.send();
+      });
+    }
+      window.onload = function(){
+        //3.요청연결
+        let url = "https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=" + day;
+        promiseAjax(url)
+        .then(res => JSON.parse(res))
+        .then(res => {
+          res = res.boxOfficeResult.dailyBoxOfficeList;
+          for(let i=0; i<res.length; i++) {
+            result.innerHTML += `<div>${res[i].movieNm}</div>`;
+          } 
+        })   
+    };
+
+    
+  </script>
   </body>
 </html>

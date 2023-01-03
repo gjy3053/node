@@ -133,7 +133,7 @@
           <label for="pw">PASSWORD</label>
         </div>
         <div class="btn-area">
-          <button id="btn" type="submit">LOGIN</button>
+          <button id="btn" type="button">LOGIN</button>
         </div>
       </form>
       <div class="caption">
@@ -141,24 +141,26 @@
         <a href="">회원가입</a>
       </div>
     </section>
-
     <script>
-      let id = $("#id");
-      let pw = $("#pw");
-      let btn = $("#btn");
-
-      $(btn).on("click", function () {
-        if ($(id).val() == "") {
-          $(id).next("label").addClass("warning");
-          setTimeout(function () {
-            $("label").removeClass("warning");
-          }, 1500);
-        } else if ($(pw).val() == "") {
-          $(pw).next("label").addClass("warning");
-          setTimeout(function () {
-            $("label").removeClass("warning");
-          }, 1500);
-        }
+      btn.addEventListener("click", function () {
+        let logindata = {
+          id: id.value,
+          pw: pw.value,
+        };
+        fetch("/login", {
+          method: "post",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(logindata), //서버로 자료를 json으로 보낸다
+        })
+          .then((res) => res.json())
+          .then((res) => {
+            if (res.result == true) location.href = "/board";
+            else {
+              alert("로그인실패");
+            }
+          }); //(client과 서버와의 통신형식은 무조건String) 그리고 나서 받을때도json으로 받는다
       });
     </script>
   </body>

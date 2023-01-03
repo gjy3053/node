@@ -107,16 +107,33 @@
         <!-- Page content-->
         <div class="container-fluid">
         
-    <% for(let i=0; i<list.length; i++) {%>  <!-- 자바스크립 코드 넣을때 <% %> -->
-        <div><label>제목: <%=list[i].title %></label></div>
-        <div><label>작성자: <%=list[i].writer %></label></div>
-        <div><label>날짜 : <%=list[i].day %></label></div>
-        <div><label>내용 : <%=list[i].contents %></label></div>  
-    <% } %>
-      
-    <button>수정하기</button>
-    <button id="delBtn" type="button">삭제하기</button>
-  
+     
+        <br><h2>게시글 보기</h2><br>
+            <table>
+                <tr>
+                    <th>제목</th>
+                    <td><textarea cols="100" rows="1" name="content"><%=list[0].title %></textarea></td>
+                </tr>
+                <tr>
+                    <th>작성자</th>
+                    <td><textarea cols="100" rows="1" name="content"><%=list[0].writer %></textarea></td>
+                </tr>
+                <tr>
+                    <th>날짜</th>
+                    <td><textarea cols="100" rows="1" name="content"><%=list[0].day %></textarea></td>
+                </tr>
+                <tr>
+                    <th>내용</th>
+                    <td><textarea cols="100" rows="25" name="content"><%=list[0].contents %></textarea></td>
+                </tr>
+            </table>
+            <button onclick="location.href='/board'" >뒤로가기</button>
+            
+              <button id="modBtn" type="button"  onclick="location.href='/mod/<%=list[0].no %>'">수정하기</button>
+               <button id="delBtn" type="button" onclick="boardDelete(<%=list[0].no%>)" >삭제하기</button>
+               
+       
+       
       </div>
     
     <!-- Bootstrap core JS-->
@@ -125,31 +142,15 @@
     <script src="/jsHome/scripts_home.js"></script>
     <!-- <script src="/javascripts/look2.js"></script> -->
     <script>
-      function customerDelete() { //고치기
-  //삭제버튼 이벤트
- delBtn.addEventListener("click", function (ev) {
-    if (ev.target.id == "btnsel") {
-      // 단건조회
-      let id = ev.target.closest("tr").getAttribute("data-id");
-      fetch(`${url}/${id}`)
-        .then((res) => res.json())
-        .then((res) => {
-          userid.value = res.id; //수정할때 id값 필수
-          username.value = res.name;
-          email.value = res.email;
-          phone.value = res.phone;
-          address.value = res.address;
-        }); //customers/5번  get방식이라서 {}없어도 됨
-    } else if (ev.target.id == "delbtn") {
-      //삭제
-      let id = ev.target.closest("tr").getAttribute("data-id");
-      fetch(`${url}/${id}`, { method: "delete" }).then(() => {
-        selectAll();
-      });
-    }
-  });
-}
-
+      function boardDelete(no) { 
+        fetch(`/look/${no}`, { method: "delete" }).then(res => res.json())
+        .then(data =>{
+          alert("삭제완료")
+           location.href="/board";
+        }).catch(err=> console.log(err));
+      }; 
+      
+    
     </script>
   </body>
 </html>

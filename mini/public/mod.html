@@ -12,23 +12,24 @@
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="../public/cssHome/styles.css" rel="stylesheet" />
- 
+    <link href="/cssHome/styles.css" rel="stylesheet" />
+    <style>
+      button {
+        margin-left: 10px;
+      }
+    </style>
   </head>
   <body>
     <div class="d-flex" id="wrapper">
       <!-- Sidebar-->
       <div class="border-end bg-white" id="sidebar-wrapper">
-        <a
-          class="list-group-item list-group-item-action list-group-item-light p-3"
-          href="../public/home.html"
-          >메인화면</a
-        >
+        <div class="sidebar-heading border-bottom bg-light">메인화면</div>
         <div class="list-group list-group-flush">
-          
-
-          <div class="sidebar-heading border-bottom bg-light">게시판</div>
-
+          <a
+            class="list-group-item list-group-item-action list-group-item-light p-3"
+            href="/board"
+            >게시판</a
+          >
           <a
             class="list-group-item list-group-item-action list-group-item-light p-3"
             href="#!"
@@ -61,7 +62,14 @@
             <button class="btn btn-primary" id="sidebarToggle">
               Toggle Menu
             </button>
-           
+            <button
+              class="btn btn-primary"
+              button
+              onclick="location.href='login.html'"
+            >
+              로그인
+            </button>
+
             <button
               class="navbar-toggler"
               type="button"
@@ -106,33 +114,20 @@
         </nav>
         <!-- Page content-->
         <div class="container-fluid">
-        <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>no</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>날짜</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!--  <tr>
-            <th>1</th>
-            <th>안녕</th>
-            <th>고지연</th>
-            <th>23.01.02</th>
-          </tr> -->
-        </tbody>
-      </table>
-      </div>
-    </div>
+          <h1 class="mt-4">글작성 페이지</h1>
+          <p>제목</p>
+          <input type="text" name="title" />
+          <p>작성자</p>
+          <input type="text" name="writer" />
+          <p>내용</p>
+          <textarea rows="5" name="contents"></textarea>
+          <button id="btn">작성완료</button>
+        </div>
       </div>
     </div>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
-    <script src="../public/jsHome/scripts_home.js"></script>
-    <script src="../public/javascripts/client.js"></script>
-
+    <script src="/jsHome/scripts_home.js"></script>
   </body>
 </html>
