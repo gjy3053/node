@@ -9,4 +9,9 @@ router.get("/", function (req, res, next) {
   });
 });
 
+router.post("/", (req, res, next) => {
+  req.session.destroy(); //destory()함수를 사용해서 세션 삭제
+  res.redirect("/home");
+});
+
 module.exports = router;

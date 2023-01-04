@@ -14,6 +14,7 @@ var writeRouter = require("./routes/write"); //글작성
 var modRouter = require("./routes/mod"); //글수정
 var loginRouter = require("./routes/login"); //로그인홈페이지
 var homeRouter = require("./routes/home");
+//var proxy = require("express-http-proxy");
 
 var app = express();
 
@@ -49,6 +50,7 @@ app.use("/write", writeRouter);
 app.use("/mod", modRouter);
 app.use("/login", loginRouter);
 app.use("/home", homeRouter);
+//app.use("/proxy", proxy("https://dgfc.or.kr"));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

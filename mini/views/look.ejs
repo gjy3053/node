@@ -129,9 +129,11 @@
             </table>
             <button onclick="location.href='/board'" >뒤로가기</button>
             <% if(islogin) { %> 
+              <% if(id==list[0].id) { %> 
                 <button id="modBtn" type="button"  onclick="location.href='/mod/<%=list[0].no %>'">수정하기</button>
                <button id="delBtn" type="button" onclick="boardDelete(<%=list[0].no%>)" >삭제하기</button> 
               <% } %> 
+               <% } %> 
        
        
       </div>

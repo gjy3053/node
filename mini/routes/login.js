@@ -8,7 +8,7 @@ router.get("/", (req, res) => {
 router.post("/", (req, res) => {
   const id = req.body.id;
   const pw = req.body.pw;
-  const name = req.body.name;
+  //const name = req.body.name;
   sql = "SELECT * FROM login where id=?";
   pool.query(sql, id, function (err, results, fields) {
     if (results.length > 0) {
@@ -16,7 +16,6 @@ router.post("/", (req, res) => {
         console.log("로그인완료");
         req.session.islogin = true;
         req.session.userid = id;
-
         res.send({ result: true });
       } else {
         console.log("로그인실패");

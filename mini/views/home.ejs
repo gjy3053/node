@@ -22,6 +22,7 @@
     </style>
   </head>
   <body>
+ <!--   <form action="/home" method="post"> -->
     <div class="d-flex" id="wrapper">
       <!-- Sidebar-->
       <div class="border-end bg-white" id="sidebar-wrapper">
@@ -76,7 +77,8 @@
             <% if(islogin){ %><h4>Welcome! <%=id%></h4>
               <button
               class="btn btn-primary"
-              button
+              type="button"
+              id = "logoutBtn"
               
             >
               로그아웃
@@ -132,7 +134,10 @@
           <h1 class="mt-4">정보 공유 게시판</h1>
           <br>
       <h3>오늘의 영화</h3>
-  <div id = "result" style="height: auto; width: 50%; border:1px solid #ccc"></div>
+  <div id = "result" style="height: auto; width: 50%; border:1px solid #ccc"></div> <br>
+<!--         <h3>대구 맛집</h3>
+  <div id = "hotel" style="height: auto; width: 50%; border:1px solid #ccc"></div> -->
+  
  
     </div>
         </div>
@@ -143,25 +148,25 @@
     <!-- Core theme JS-->
     <script src="/jsHome/scripts_home.js"></script>
     <script>
-    
+   
       let today = new Date(); 
       //document.getElementById("dt").value = String(today.getFullYear()) +("0" + (1 + today.getMonth())).slice(-2) + ("0" + (today.getDate()-1)).slice(-2);
       let day = String(today.getFullYear()) +("0" + (1 + today.getMonth())).slice(-2) + ("0" + (today.getDate()-1)).slice(-2);
-    function promiseAjax(url){
-      return new Promise(function(resolve, reject){
-        //비동기함수 호출     
-        let xhr = new XMLHttpRequest();
-        xhr.onload = function(){ 
-          resolve(xhr.response);
-        };
-        xhr.onerror = function(){
-          reject(xhr.status);
-        }
-        xhr.open('get',url);
-        xhr.send();
+      function promiseAjax(url){
+        return new Promise(function(resolve, reject){
+          //비동기함수 호출     
+          let xhr = new XMLHttpRequest();
+          xhr.onload = function(){ 
+            resolve(xhr.response);
+          };
+          xhr.onerror = function(){
+            reject(xhr.status);
+          }
+          xhr.open('get',url);
+          xhr.send();
       });
     }
-      window.onload = function(){
+    window.onload = function(){
         //3.요청연결
         let url = "https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=" + day;
         promiseAjax(url)
@@ -169,10 +174,25 @@
         .then(res => {
           res = res.boxOfficeResult.dailyBoxOfficeList;
           for(let i=0; i<res.length; i++) {
-            result.innerHTML += `<div>${res[i].movieNm}</div>`;
+            result.innerHTML += `<div>${(i+1)+"위 " + res[i].movieNm}</div>`;
           } 
         })   
-    }; 
+      };       
+      logout();
+        function logout() {
+          logoutBtn.addEventListener("click", function () {
+            fetch("/home", {
+              method: "post",
+              headers: {
+                "content-type": "application/json",
+              }, 
+              
+            })
+              .then(() => {
+                alert("로그아웃"); 
+              location.href = "/home";})
+        })
+      }
   </script>
   </body>
 </html>
