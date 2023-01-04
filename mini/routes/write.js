@@ -8,7 +8,9 @@ var router = express.Router();
 router.get("/", (req, res) => {
   sql = "SELECT * FROM board";
   pool.query(sql, function (err, results, fields) {
-    res.render("write.ejs", "");
+    res.render("write.ejs", {
+      id: req.session.userid,
+    });
   });
 });
 

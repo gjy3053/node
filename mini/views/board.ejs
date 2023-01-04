@@ -25,7 +25,7 @@
       <div class="border-end bg-white" id="sidebar-wrapper">
         <a
           class="list-group-item list-group-item-action list-group-item-light p-3"
-          href="/home.html"
+          href="/home"
           >메인화면</a
         >
 
@@ -66,8 +66,11 @@
             <button class="btn btn-primary" id="sidebarToggle">
               Toggle Menu
             </button>
-            <button class="btn btn-primary" onclick="location.href='write'" > 작성하기</button>
-
+            
+            <% if(islogin){ %>
+            <button class="btn btn-primary" onclick="location.href='write'" > 작성하기</button>  
+ 
+   <% } %>
             <button
               class="navbar-toggler"
               type="button"
@@ -132,7 +135,7 @@
     <tr onclick="location.href='/look/<%=list[i].no %>'">
       <td><%=list[i].no %></td>     <!-- 자바스크립 값 출력할때  넣을때 <%= %> -->
       <td><%=list[i].title %></td>
-      <td><%=list[i].writer %></td>
+      <td><%=list[i].id %></td>
       <td><%=list[i].day %></td>
     </tr>
     <% } %>
@@ -147,5 +150,6 @@
     <!-- Core theme JS-->
     <script src="/jsHome/scripts_home.js"></script>
    <!-- <script src="/javascripts/client.js"></script> -->
+  
   </body>
 </html>

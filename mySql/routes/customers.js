@@ -4,9 +4,9 @@ var express = require("express");
 const pool = require("../test/pool");
 var router = express.Router();
 
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
   sql = "SELECT * FROM customers";
-  pool.query(sql, function (err, results, fields) {
+  let result = await pool.query(sql, function (err, results, fields) {
     if (err) {
       console.log(err);
     }

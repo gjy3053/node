@@ -21,7 +21,7 @@
       <div class="border-end bg-white" id="sidebar-wrapper">
         <a
           class="list-group-item list-group-item-action list-group-item-light p-3"
-          href="/home.html"
+          href="/home"
           >메인화면</a
         >
         <div class="list-group list-group-flush">
@@ -116,7 +116,7 @@
                 </tr>
                 <tr>
                     <th>작성자</th>
-                    <td><textarea cols="100" rows="1" name="content"><%=list[0].writer %></textarea></td>
+                    <td><textarea cols="100" rows="1" name="content"><%=list[0].id %></textarea></td>
                 </tr>
                 <tr>
                     <th>날짜</th>
@@ -128,10 +128,10 @@
                 </tr>
             </table>
             <button onclick="location.href='/board'" >뒤로가기</button>
-            
-              <button id="modBtn" type="button"  onclick="location.href='/mod/<%=list[0].no %>'">수정하기</button>
-               <button id="delBtn" type="button" onclick="boardDelete(<%=list[0].no%>)" >삭제하기</button>
-               
+            <% if(islogin) { %> 
+                <button id="modBtn" type="button"  onclick="location.href='/mod/<%=list[0].no %>'">수정하기</button>
+               <button id="delBtn" type="button" onclick="boardDelete(<%=list[0].no%>)" >삭제하기</button> 
+              <% } %> 
        
        
       </div>

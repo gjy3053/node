@@ -7,7 +7,7 @@ router.get("/:no", (req, res) => {
   sql = "SELECT * FROM board where no =?";
   const no = req.params.no;
   pool.query(sql, no, function (err, results, fields) {
-    res.render("mod.ejs", { list: results });
+    res.render("mod.ejs", { list: results, id: req.session.userid });
   });
 });
 //수정

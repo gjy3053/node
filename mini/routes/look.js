@@ -7,7 +7,11 @@ router.get("/:no", (req, res) => {
   sql = "SELECT * FROM board where no =?";
   const no = req.params.no;
   pool.query(sql, no, function (err, results, fields) {
-    res.render("look.ejs", { list: results });
+    res.render("look.ejs", {
+      list: results,
+      islogin: req.session.islogin,
+      id: req.session.userid,
+    });
   });
 });
 

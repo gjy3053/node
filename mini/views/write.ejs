@@ -23,13 +23,14 @@
     <div class="d-flex" id="wrapper">
       <!-- Sidebar-->
       <div class="border-end bg-white" id="sidebar-wrapper">
-        <div class="sidebar-heading border-bottom bg-light">메인화면</div>
-        <div class="list-group list-group-flush">
           <a
-            class="list-group-item list-group-item-action list-group-item-light p-3"
-            href="/board"
-            >게시판</a
-          >
+          class="list-group-item list-group-item-action list-group-item-light p-3"
+          href="/home"
+          >메인화면</a
+        >
+        <div class="list-group list-group-flush">
+          <div class="sidebar-heading border-bottom bg-light">게시판</div>
+          
           <a
             class="list-group-item list-group-item-action list-group-item-light p-3"
             href="#!"
@@ -62,13 +63,7 @@
             <button class="btn btn-primary" id="sidebarToggle">
               Toggle Menu
             </button>
-            <button
-              class="btn btn-primary"
-              button
-              onclick="location.href='login.html'"
-            >
-              로그인
-            </button>
+            
 
             <button
               class="navbar-toggler"
@@ -120,9 +115,9 @@
                     <th>제목</th>
                     <td><textarea cols="100" rows="1" id="title"></textarea></td>
                 </tr>
-                <tr>
-                    <th>작성자</th>
-                    <td><textarea cols="100" rows="1" id="writer"></textarea></td>
+                 <tr>
+                    <th>id</th>
+                    <td><textarea cols="100" rows="1" id="id"><%=id%></textarea></td>
                 </tr>
                 <tr>
                     <th>내용</th>
@@ -144,7 +139,7 @@
         wirteBtn.addEventListener("click", function () {
           let data = {
             title: title.value,
-            writer: writer.value,
+            id: id.value,
             contents: contents.value,
           };
           fetch("/write/save", {

@@ -13,6 +13,7 @@ var lookRouter = require("./routes/look"); //상세조회
 var writeRouter = require("./routes/write"); //글작성
 var modRouter = require("./routes/mod"); //글수정
 var loginRouter = require("./routes/login"); //로그인홈페이지
+var homeRouter = require("./routes/home");
 
 var app = express();
 
@@ -47,6 +48,7 @@ app.use("/look", lookRouter);
 app.use("/write", writeRouter);
 app.use("/mod", modRouter);
 app.use("/login", loginRouter);
+app.use("/home", homeRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
