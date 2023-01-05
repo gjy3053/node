@@ -8,7 +8,7 @@ router.get("/", function (req, res, next) {
 
 router.post("/", (req, res) => {
   let sql = "insert into login set ?";
-  console.log(req.body);
+  // console.log(req.body);
   pool.query(sql, req.body, function (err, results, fields) {
     res.send(results);
     // res.redirect("/home");

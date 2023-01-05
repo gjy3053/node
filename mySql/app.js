@@ -29,7 +29,7 @@ app.use(
     cookie: {
       httpOnly: true,
       //secure: true, //https일때 쿠기 저장됨
-      maxAge: 60000, //밀리초
+      maxAge: 30 * 24 * 60 * 60, //밀리초
     },
     store: new fileStore(),
   })

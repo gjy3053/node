@@ -16,6 +16,7 @@
     <style>
       button {
         margin-left: 10px;
+        margin-right: 10px;
       }
    
   
@@ -74,7 +75,7 @@
               로그인
             </button>
                <% } %>
-            <% if(islogin){ %><h4>Welcome! <%=id%></h4>
+            <% if(islogin){ %>
               <button
               class="btn btn-primary"
               type="button"
@@ -82,7 +83,8 @@
               
             >
               로그아웃
-            </button>
+            </button> 
+            <h5> Welcome! <%=id%></h5>
             
    <% } %>
 

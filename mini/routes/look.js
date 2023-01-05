@@ -15,6 +15,15 @@ router.get("/:no", (req, res) => {
   });
 });
 
+//댓글 조회
+router.get("/:no/comment", (req, res) => {
+  sql = "SELECT * FROM comment where board_no =?";
+  const board_no = req.params.no;
+  pool.query(sql, board_no, function (err, results, fields) {
+    res.send(results);
+  });
+});
+
 //삭제
 router.delete("/:no", (req, res) => {
   const no = req.params.no;

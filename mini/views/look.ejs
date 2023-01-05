@@ -127,17 +127,29 @@
                     <td><textarea cols="100" rows="25" name="content"><%=list[0].contents %></textarea></td>
                 </tr>
             </table>
+            <%if(!islogin) { %>
             <button onclick="location.href='/board'" >뒤로가기</button>
-            <% if(islogin) { %> 
-             <br><textarea cols="10" rows="1" name="content" id="comWriter"><%=id%></textarea>
-             <textarea cols="50" rows="3" name="com" id="com"></textarea> <button type = "button" onclick="comWrite(<%=list[0].no%>)">댓글 작성</button> <br>
+            <%}%>
+
+            <% if(islogin && id!=list[0].id ) { %> 
+              <div><button onclick="location.href='/board'" >뒤로가기</button> 
+             <br><br> <textarea cols="10" rows="1" name="content" id="comWriter"><%=id%></textarea>
+             <textarea cols="50" rows="1" name="com" id="com"></textarea><button type = "button" onclick="comWrite(<%=list[0].no%>)">댓글 작성</button></div>
+             <%}%>
+
               <% if(id==list[0].id) { %> 
+                <div><button onclick="location.href='/board'" >뒤로가기</button>
                 <button id="modBtn" type="button"  onclick="location.href='/mod/<%=list[0].no %>'">수정하기</button>
-               <button id="delBtn" type="button" onclick="boardDelete(<%=list[0].no%>)" >삭제하기</button> 
+               <button id="delBtn" type="button" onclick="boardDelete(<%=list[0].no%>)" >삭제하기</button> </div> <br><br>
+               <textarea cols="10" rows="1" name="content" id="comWriter"><%=id%></textarea>
+                <textarea cols="50" rows="1" name="com" id="com"></textarea> <button type = "button" onclick="comWrite(<%=list[0].no%>)">댓글 작성</button>
               <% } %> 
-               <% } %> 
-               
-       
+              
+
+             
+          
+  <div id = "space"></div> 
+    
       </div>
     
     <!-- Bootstrap core JS-->
@@ -146,7 +158,8 @@
     <script src="/jsHome/scripts_home.js"></script>
     <!-- <script src="/javascripts/look2.js"></script> -->
     <script>
-      function boardDelete(no) { 
+      var no = "<%=list[0].no %>";
+      function boardDelete() { 
         fetch(`/look/${no}`, { method: "delete" }).then(res => res.json())
         .then(data =>{
           alert("삭제완료")
@@ -170,10 +183,25 @@
           .then((res) => res.json()) 
             .then(() => {
               alert("등록되었습니다.");
-              location.href = "/board";
-            }); //(client과 서버와의 통신형식은 무조건String) 그리고 나서 받을때도json으로 받는다
+              location.reload()
+            }); 
+        }
+
+       function comLook() {
+        fetch(`/look/${no}/comment`)
+          .then((res) => res.json())
+          .then((res)=> {
+            for(let i=0; i<res.length; i++) {
+              const str = `<br><textarea cols="10" rows="1">${res[i].id}</textarea><textarea cols="50" rows="1">${res[i].content}</textarea> <button> id="ComDel"x</button>`
+
+                space.innerHTML += str;
+            }
+            
+          }
+          )
         }
       
+   comLook();
     
     </script>
   </body>
