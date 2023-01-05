@@ -142,7 +142,9 @@
         </tbody>
       </table>
       </div>
-      <input name="search"> <button>검색</button>
+      <form action="/board/find" method="post">
+      <input id="find" name="find" > <button  id="findBtn" type="submit">검색</button>
+      </form>
     </div>
       </div>
     </div>
@@ -152,7 +154,25 @@
     <script src="/jsHome/scripts_home.js"></script>
    <!-- <script src="/javascripts/client.js"></script> -->
   <script>
-
+ /*  findBtn.addEventListener("click", function () {
+  let find = find.value;
+      fetch(`/board/find`, {
+        method: "post",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(find), //서버로 자료를 json으로 보낸다
+      })
+        .then((res) => res.json()) //(client과 서버와의 통신형식은 무조건String) 그리고 나서 받을때도json으로 받는다
+        .then((res) => {
+          if (res.result == true) {
+            alert("검색완료");
+            location.href = "/board";
+          } else {
+            alert("검색실패");
+          }
+        });
+    }); */
   </script>
   </body>
 </html>

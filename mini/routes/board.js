@@ -13,14 +13,17 @@ router.get("/", (req, res) => {
   });
 }); //전체조회
 
-/* router.post("/search", (req, res) => {
-  let find = req.body.search;
+router.post("/find", (req, res) => {
+  const find = req.body.find;
   sql = "select * from board where title like concat('%', ? '%')";
-  pool.query(sql, find, (err, results, fields) {
-    if(results){
-      res.render("home", results)
-    } else res.render("없음")
-  })
-
-}); */
+  pool.query(sql, find, function (err, results, fields) {
+    if (results) {
+      res.render("board.ejs", {
+        list: results,
+        islogin: req.session.islogin,
+        id: req.session.userid,
+      });
+    }
+  });
+});
 module.exports = router;

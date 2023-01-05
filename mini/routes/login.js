@@ -21,7 +21,7 @@ router.post("/", (req, res) => {
         console.log("로그인실패");
         res.send({ result: false });
       }
-    }
+    } else res.send({ result: false });
   });
 });
 
