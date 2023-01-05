@@ -129,12 +129,14 @@
             </table>
             <button onclick="location.href='/board'" >뒤로가기</button>
             <% if(islogin) { %> 
+             <br><textarea cols="10" rows="1" name="content" id="comWriter"><%=id%></textarea>
+             <textarea cols="50" rows="3" name="com" id="com"></textarea> <button type = "button" onclick="comWrite(<%=list[0].no%>)">댓글 작성</button> <br>
               <% if(id==list[0].id) { %> 
                 <button id="modBtn" type="button"  onclick="location.href='/mod/<%=list[0].no %>'">수정하기</button>
                <button id="delBtn" type="button" onclick="boardDelete(<%=list[0].no%>)" >삭제하기</button> 
               <% } %> 
                <% } %> 
-       
+               
        
       </div>
     
@@ -151,6 +153,26 @@
            location.href="/board";
         }).catch(err=> console.log(err));
       }; 
+      
+      function comWrite(no, id) {
+        let data = {
+          content:com.value,
+          board_no : no,
+          id: comWriter.value,
+        };
+        fetch(`/look/${no}/save`,{
+          method:"post",
+           headers: {
+              "content-type": "application/json",
+            },
+               body: JSON.stringify(data), 
+          })
+          .then((res) => res.json()) 
+            .then(() => {
+              alert("등록되었습니다.");
+              location.href = "/board";
+            }); //(client과 서버와의 통신형식은 무조건String) 그리고 나서 받을때도json으로 받는다
+        }
       
     
     </script>

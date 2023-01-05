@@ -25,4 +25,15 @@ router.delete("/:no", (req, res) => {
   });
 });
 
+//댓글 등록
+router.post("/:no/save", (req, res) => {
+  let sql = "insert into comment set ?";
+  pool.query(sql, req.body, function (err, results, fields) {
+    if (err) {
+      console.log(err);
+    }
+    res.send(results);
+  });
+});
+
 module.exports = router;
