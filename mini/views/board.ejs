@@ -125,22 +125,16 @@
           </tr>
         </thead>
         <tbody id="con">
-          <!--  <tr>
-            <th>1</th>
-            <th>안녕</th>
-            <th>고지연</th>
-            <th>23.01.02</th>
-          </tr> -->
-           <% for(let i=0; i<list.length; i++) {%>  <!-- 자바스크립 코드 넣을때 <% %> -->
+           <% for(let i=0; i<list.length; i++) {%> 
     <tr onclick="location.href='/look/<%=list[i].no %>'">
-      <td><%=list[i].no %></td>     <!-- 자바스크립 값 출력할때  넣을때 <%= %> -->
+      <td><%=list[i].no %></td>     
       <td><%=list[i].title %></td>
       <td><%=list[i].id %></td>
       <td><%=list[i].day %></td>
     </tr>
     <% } %>
         </tbody>
-      </table>
+      </table>                                                                                                                                                       
       </div>
       <form action="/board/find" method="post">
         <input id="find" name="find" > <button  id="findBtn" type="submit">검색</button>
@@ -153,26 +147,6 @@
     <!-- Core theme JS-->
     <script src="/jsHome/scripts_home.js"></script>
    <!-- <script src="/javascripts/client.js"></script> -->
-  <script>
- /*  findBtn.addEventListener("click", function () {
-  let find = find.value;
-      fetch(`/board/find`, {
-        method: "post",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(find), //서버로 자료를 json으로 보낸다
-      })
-        .then((res) => res.json()) //(client과 서버와의 통신형식은 무조건String) 그리고 나서 받을때도json으로 받는다
-        .then((res) => {
-          if (res.result == true) {
-            alert("검색완료");
-            location.href = "/board";
-          } else {
-            alert("검색실패");
-          }
-        });
-    }); */
-  </script>
+
   </body>
 </html>
