@@ -135,6 +135,7 @@
               <div><button onclick="location.href='/board'" >뒤로가기</button> 
              <br><br> <textarea cols="10" rows="1" name="content" id="comWriter"><%=id%></textarea>
              <textarea cols="50" rows="1" name="com" id="com"></textarea><button type = "button" onclick="comWrite(<%=list[0].no%>)">댓글 작성</button></div>
+             
              <%}%>
 
               <% if(id==list[0].id) { %> 
@@ -143,12 +144,13 @@
                <button id="delBtn" type="button" onclick="boardDelete(<%=list[0].no%>)" >삭제하기</button> </div> <br><br>
                <textarea cols="10" rows="1" name="content" id="comWriter"><%=id%></textarea>
                 <textarea cols="50" rows="1" name="com" id="com"></textarea> <button type = "button" onclick="comWrite(<%=list[0].no%>)">댓글 작성</button>
+                 
               <% } %> 
               
-
+                  <div id = "space"></div>
              
           
-  <div id = "space"></div> 
+ 
     
       </div>
     
@@ -159,6 +161,8 @@
     <!-- <script src="/javascripts/look2.js"></script> -->
     <script>
       var no = "<%=list[0].no %>";
+      var id = "<%=list[0].id %>";
+     
       function boardDelete() { 
         fetch(`/look/${no}`, { method: "delete" }).then(res => res.json())
         .then(data =>{
@@ -192,7 +196,10 @@
           .then((res) => res.json())
           .then((res)=> {
             for(let i=0; i<res.length; i++) {
-              const str = `<br><textarea cols="10" rows="1">${res[i].id}</textarea><textarea cols="50" rows="1">${res[i].content}</textarea> <button> id="ComDel"x</button>`
+             let del='';
+             // if(id==res[i].id) 
+            // {del =`<button type = "button" id ="comdel">삭제</button>`}
+              const str = `<br><textarea cols="10" rows="1">${res[i].id}</textarea><textarea cols="50" rows="1">${res[i].content}</textarea>${del}`
 
                 space.innerHTML += str;
             }
@@ -200,9 +207,16 @@
           }
           )
         }
-      
-   comLook();
-    
+        comLook();
+
+ comdel.addEventListener("click",function() { 
+        fetch(`/look/${no}/comment`, { method: "delete" }).then(res => res.json())
+        .then(data =>{
+          alert("삭제완료")
+            location.reload()
+        }).catch(err=> console.log(err));
+      }); 
+     
     </script>
   </body>
 </html>

@@ -4,7 +4,8 @@ var router = express.Router();
 
 //단건조회
 router.get("/:no", (req, res) => {
-  sql = "SELECT * FROM board where no =?";
+  sql =
+    "SELECT no, title, date_format(day, '%Y-%m-%d')day, contents, id FROM board where no =?";
   const no = req.params.no;
   pool.query(sql, no, function (err, results, fields) {
     res.render("look.ejs", {
@@ -12,15 +13,6 @@ router.get("/:no", (req, res) => {
       islogin: req.session.islogin,
       id: req.session.userid,
     });
-  });
-});
-
-//댓글 조회
-router.get("/:no/comment", (req, res) => {
-  sql = "SELECT * FROM comment where board_no =?";
-  const board_no = req.params.no;
-  pool.query(sql, board_no, function (err, results, fields) {
-    res.send(results);
   });
 });
 
@@ -45,4 +37,22 @@ router.post("/:no/save", (req, res) => {
   });
 });
 
+//댓글 조회
+router.get("/:no/comment", (req, res) => {
+  sql = "SELECT * FROM comment where board_no =?";
+  const board_no = req.params.no;
+  pool.query(sql, board_no, function (err, results, fields) {
+    res.send(results);
+  });
+});
+
+//댓글 삭제
+router.delete("/no:comment", (req, res) => {
+  const no = req.params.no;
+  let sql = "delete from comment where no = ?";
+  pool.query(sql, no, function (err, results, fields) {
+    res.statusCode = 200;
+    res.send(results);
+  });
+});
 module.exports = router;

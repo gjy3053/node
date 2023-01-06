@@ -133,12 +133,12 @@
         </nav>
         <!-- Page content-->
         <div class="container-fluid">
-          <h1 class="mt-4">정보 공유 게시판</h1>
+          <h1 class="mt-4">영화 후기 게시판</h1>
           <br>
-      <h3>오늘의 영화</h3>
+      <h3>일별 박스오피스</h3>
   <div id = "result" style="height: auto; width: 50%; border:1px solid #ccc"></div> <br>
-<!--         <h3>대구 맛집</h3>
-  <div id = "hotel" style="height: auto; width: 50%; border:1px solid #ccc"></div> -->
+        <h3 id = "weekly">주말 박스오피스</h3> 
+  <div id = "result2" style="height: auto; width: 50%; border:1px solid #ccc"></div>
   
  
     </div>
@@ -154,6 +154,7 @@
       let today = new Date(); 
       //document.getElementById("dt").value = String(today.getFullYear()) +("0" + (1 + today.getMonth())).slice(-2) + ("0" + (today.getDate()-1)).slice(-2);
       let day = String(today.getFullYear()) +("0" + (1 + today.getMonth())).slice(-2) + ("0" + (today.getDate()-1)).slice(-2);
+      let day2 = String(today.getFullYear()) +("0" + (1 + today.getMonth())).slice(-2) + ("0" + (today.getDate()-6)).slice(-2);
       function promiseAjax(url){
         return new Promise(function(resolve, reject){
           //비동기함수 호출     
@@ -179,7 +180,22 @@
             result.innerHTML += `<div>${(i+1)+"위 " + res[i].movieNm}</div>`;
           } 
         })   
-      };       
+      };   
+      movie();
+      function movie(){
+        //3.요청연결
+        let url = "https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchWeeklyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=" + day2;
+        promiseAjax(url)
+        .then(res => JSON.parse(res))
+        .then(res => {
+          weekly.innerHTML += ` (${res.boxOfficeResult.showRange})`;
+          res = res.boxOfficeResult.weeklyBoxOfficeList;
+          for(let i=0; i<res.length; i++) {
+            result2.innerHTML += `<div>${(i+1)+"위 " + res[i].movieNm}</div>`;
+          } 
+        })   
+      };  
+        
       logout();
         function logout() {
           logoutBtn.addEventListener("click", function () {
